@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+</head>
+<body>
+<h1>Список товаров</h1>
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Made In</th>
+        <th>Price</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="p : ${listProducts}">
+        <td data-th-text="${p.id}"></td>
+        <td data-th-text="${p.name}"></td>
+        <td data-th-text="${p.brand}"></td>
+        <td data-th-text="${p.madein}"></td>
+        <td data-th-text="${p.price}"></td>
+        <td data-th-text="someActions..."></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    Total Items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
+    &nbsp; - &nbsp;
+
+    <a data-th-if="${currentPage > 1}" data-th-href="@{/page/1}">First</a>
+    <span data-th-unless="${currentPage > 1}" >First</span>
+
+    <a data-th-if="${currentPage > 1}" data-th-href="@{'/page/' + ${currentPage - 1}}">Previous</a>
+    <span data-th-unless="${currentPage > 1}" >Previous</span>
+
+    <span data-th-each="i : ${#numbers.sequence(1, totalPages)}">
+        <a data-th-if="${i != currentPage}" data-th-href="@{'/page/' + ${i}}">[[${i}]]</a> &nbsp;&nbsp;
+        <span data-th-unless="${i != currentPage}">[[${i}]]</span>
+        &nbsp;&nbsp;
+    </span>
+
+    Next
+    Last
+</div>
+</body>
+</html>
